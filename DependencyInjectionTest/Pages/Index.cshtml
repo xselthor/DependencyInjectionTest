@@ -1,0 +1,132 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">D&D 5e - SRD Monsters List</h1>
+    <p>Data loaded from @Model.dataFrom file</p>
+    <p>Original <b>JSON</b> data file comes from the GitHub page <br/><a href="https://gist.github.com/tkfu/9819e4ac6d529e225e9fc58b358c3479" class="stretched-link" target="_blank">https://gist.github.com/tkfu/9819e4ac6d529e225e9fc58b358c3479</a></p>
+</div>
+
+@{
+    int i = 0;
+    foreach (var monster in @Model.monsters)
+    {
+        i++;
+        <table class="table table-bordered ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Nr</th>
+                <th>Image</th>
+                <th colspan="3">Name</th>
+                <th class="align-baseline">Meta</th>
+                <th>Challenge</th>
+                <th>Senses</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="font-weight-bold border">@i</td>
+                <td><img src="@monster.img_url" class="img-responsive" width="150"/></td>
+                <td>@monster.name</td>
+                <td colspan="3">@monster.meta</td>
+                <td>@monster.Challenge</td>
+                <td>@monster.Senses</td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <table>
+                        <thead class="bg-secondary text-white">
+                        <tr>
+                            <td class="font-weight-bold" >Speed</td>
+                            <td class="font-weight-bold">STR</td>
+                            <td class="font-weight-bold">DEX</td>
+                            <td class="font-weight-bold">CON</td>
+                            <td class="font-weight-bold">INT</td>
+                            <td class="font-weight-bold">WIS</td>
+                            <td class="font-weight-bold">CHA</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>@monster.HitPoints</td>
+                            <td>@monster.STR @monster.STR_mod</td>
+                            <td>@monster.DEX @monster.DEX_mod</td>
+                            <td>@monster.CON @monster.CON_mod</td>
+                            <td>@monster.INT @monster.INT_mod</td>
+                            <td>@monster.WIS @monster.WIS_mod</td>
+                            <td>@monster.CHA @monster.CHA_mod</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                    <table>
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td class="font-weight-bold">Armor Class</td>
+                                <td class="font-weight-bold">Hit Points</td>
+                                <td class="font-weight-bold">Speed</td>
+                                <td class="font-weight-bold">Saving Throws</td>
+                                <td class="font-weight-bold">Skills</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>@monster.ArmorClass</td>
+                            <td>@monster.HitPoints</td>
+                            <td>@monster.Speed</td>
+                            <td>@monster.SavingThrows</td>
+                            <td>@monster.Skills</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                    <table>
+                        <thead class="bg-secondary text-white">
+                        <tr>
+                            <td class="font-weight-bold">Languages</td>
+                            <td class="font-weight-bold">Traits</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>@monster.Languages</td>
+                            <td>@Html.Raw(@monster.Traits)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                    <table>
+                        <thead class="bg-secondary text-white">
+                        <tr>
+                            <td class="font-weight-bold">Actions</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>@Html.Raw(@monster.Actions)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                    <table>
+                        <thead class="bg-secondary text-white">
+                        <tr>
+                            <td class="font-weight-bold">Legendary Actions</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>@Html.Raw(@monster.LegendaryActions)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    }
+}
